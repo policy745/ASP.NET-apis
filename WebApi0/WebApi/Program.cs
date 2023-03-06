@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
+using WebApi.Repositories;
 
 namespace WebApi
 {
@@ -17,6 +18,7 @@ namespace WebApi
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<WebApiDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("WebApiConnection")));
+            builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 
             var app = builder.Build();
 
