@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> OnGet()
         {
-            IEnumerable<Model.Domain.Region> regions = await _regionRepository.GetRegions();
+            IEnumerable<Model.Domain.Region> regions = await _regionRepository.GetRegionsAsnyc();
 
             //Using DTO model instead of exposing our Domain model
             //List<Model.DTOs.Region> DTORegions = new List<Model.DTOs.Region>();

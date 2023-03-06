@@ -12,7 +12,7 @@ namespace WebApi.Repositories
             _db = db;
 
         }
-        public async Task<IEnumerable<Region>> GetRegions()
+        public async Task<IEnumerable<Region>> GetRegionsAsnyc()
         {
             return await _db.Regions.ToListAsync();
         }
