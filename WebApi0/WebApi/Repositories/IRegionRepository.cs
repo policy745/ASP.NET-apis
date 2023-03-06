@@ -4,6 +4,6 @@ namespace WebApi.Repositories
 {
     public interface IRegionRepository
     {
-        IEnumerable<Region> GetRegions();
+        Task<IEnumerable<Region>> GetRegions();
     }
 }
