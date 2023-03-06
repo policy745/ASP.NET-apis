@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Model.Domain;
+using WebApi.Model.DTOs;
 using WebApi.Repositories;
 
 namespace WebApi.Controllers
@@ -9,33 +11,38 @@ namespace WebApi.Controllers
     public class RegionsController : Controller
     {
         private readonly IRegionRepository _regionRepository;
-        public RegionsController(IRegionRepository regionRepository)
+        private readonly IMapper _mapper;
+        public RegionsController(IRegionRepository regionRepository, IMapper mapper)
         {
             _regionRepository = regionRepository;
+            _mapper = mapper;
 
         }
         [HttpGet]
         public IActionResult OnGet()
         {
-            IEnumerable<Region> regions = _regionRepository.GetRegions();
+            IEnumerable<Model.Domain.Region> regions = _regionRepository.GetRegions();
 
             //Using DTO model instead of exposing our Domain model
-            List<Model.Domain.DTOs.Region> DTORegions = new List<Model.Domain.DTOs.Region>();
-            regions.ToList().ForEach(region =>
-            {
-                var regions = new Model.Domain.DTOs.Region()
-                {
-                    Id = region.Id,
-                    Code = region.Code,
-                    Name = region.Name,
-                    Lat= region.Lat,
-                    Long= region.Long,
-                    Population= region.Population,
-                    Area = region.Area
-                };
+            //List<Model.DTOs.Region> DTORegions = new List<Model.DTOs.Region>();
+            //regions.ToList().ForEach(region =>
+            //{
+            //    var regions = new Model.DTOs.Region()
+            //    {
+            //        Id = region.Id,
+            //        Code = region.Code,
+            //        Name = region.Name,
+            //        Lat= region.Lat,
+            //        Long= region.Long,
+            //        Population= region.Population,
+            //        Area = region.Area
+            //    };
 
-                DTORegions.Add(regions);
-            });
+            //    DTORegions.Add(regions);
+            //});
+
+            var DTORegions = _mapper.Map<List <Model.DTOs.Region>>(regions);
+
 
 
             return Ok(DTORegions);

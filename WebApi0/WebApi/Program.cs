@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WebApi.Data;
+using WebApi.Profiles;
 using WebApi.Repositories;
 
 namespace WebApi
@@ -19,6 +21,7 @@ namespace WebApi
             builder.Services.AddDbContext<WebApiDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("WebApiConnection")));
             builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
