@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> OnGet()
         {
-            IEnumerable<Model.Domain.Region> regions = await _regionRepository.GetRegionsAsnyc();
+            IEnumerable<Model.Domain.Region> regions = await _regionRepository.GetRegionsAsync();
 
             //Using DTO model instead of exposing our Domain model
             //List<Model.DTOs.Region> DTORegions = new List<Model.DTOs.Region>();
@@ -46,6 +46,20 @@ namespace WebApi.Controllers
 
 
             return Ok(DTORegions);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetRegion(Guid id)
+        {
+            if (id == null)
+                return NotFound();
+
+            Model.Domain.Region regionId = await _regionRepository.GetRegion(id);
+            Model.DTOs.Region DTORegion = _mapper.Map<Model.DTOs.Region>(regionId);
+
+            return Ok(DTORegion);
+
         }
     }
 }
