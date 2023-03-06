@@ -1,4 +1,4 @@
-﻿namespace WebApi.Model.Domain.DTOs
+﻿namespace WebApi.Model.DTOs
 {
     public class Region
     {
