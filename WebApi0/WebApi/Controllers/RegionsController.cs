@@ -41,7 +41,7 @@ namespace WebApi.Controllers
             //    DTORegions.Add(regions);
             //});
 
-            var DTORegions = _mapper.Map<List <Model.DTOs.Region>>(regions);
+            List<Model.DTOs.Region> DTORegions = _mapper.Map<List<Model.DTOs.Region>>(regions);
 
 
 

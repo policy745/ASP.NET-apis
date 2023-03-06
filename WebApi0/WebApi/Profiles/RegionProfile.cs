@@ -6,7 +6,7 @@ namespace WebApi.Profiles
     {
         public RegionProfile()
         {
-            CreateMap<Model.Domain.Region, Model.Domain.Region>()
+            CreateMap<Model.Domain.Region, Model.DTOs.Region>()
                 .ReverseMap();
         }
     }
